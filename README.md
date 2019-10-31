@@ -34,6 +34,6 @@ Go 语言中变量的声明必须使用空格隔开，如：`var age int;`
 | 类型 | 描述 |
 | --- | --- |
 | 布尔型 bool | 布尔型的值只可以是常量 true 或者 false。如：`var b bool = true` |
-| 数字类型 | 整数型int、uint8、uint16、uint32、uint64、int8、int16、int32、int64 和 浮点型 float32、float64、complex64、complex128<br>1|
+| 数字类型 | 整数型int、uint8、uint16、uint32、uint64、int8、int16、int32、int64 <br>浮点型 float32、float64、complex64、complex128<br>其他类型：byte、rune、uint、int、uintptr|
 | 字符串类型 | Go语言的字符串使用UTF-8编码表示Unicode文本 |
 | 派生型 | 包括指针类型Pointer、数组类型、结构化类型struct、Channel类型、函数类型、切片类型、接口类型interface、Map类型 |
