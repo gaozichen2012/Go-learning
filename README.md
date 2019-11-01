@@ -226,3 +226,49 @@ func main(){
     say("tom6")
 }
 ```
+
+### 通道（channel）
+channel是用来传递数据的有一个数据结构
+通道可用于两个goroutine之间通过一个指定类型的值来同步运行和通讯。操作符<-用于指向通道的方向，发送或接收，如果方向未指定，则为双向通道
+```
+ch <- v //把V发送到通道ch
+v := <-ch // 从ch接收数据，并把值赋给v
+```
+定义一个通道使用chan关键字,如`ch := make(chan int)`
+注意：默认情况下，通道是不带缓冲区的。发送端发送数据，同时必须又接收端相应的接收数据。
+
+以下例子使用
+```
+package main
+
+import "fmt"
+
+func sum(s []int, c chan int) {
+        sum := 0
+        for _, v := range s {
+                sum += v
+                fmt.Printf("sum=%d\n",sum)
+        }
+        c <- sum // 把 sum 发送到通道 c
+}
+
+/* 通过两个 goroutine 来计算数字之和，在 goroutine 完成计算后，它会计算两个结果的和 */
+func main() {
+        s := []int{7, 2, 8, -9, 4, 0}
+
+        c := make(chan int)
+        go sum(s[:len(s)/2], c)
+        go sum(s[len(s)/2:], c)
+        x, y := <-c, <-c // 从通道 c 中接收
+
+        fmt.Println(x, y, x+y)
+}
+```
+
+## 下次学习
+1. 理解通道channel在goroutine的作用及用法
+2. 学习通道缓冲区
+3. 遍历通道与关闭通道
+4. 学习几个跳过的知识点，比如range等
+5. 找其他资料学习Go的语法，确定是不是所有语法都包含
+6. 用Go实现几个项目
