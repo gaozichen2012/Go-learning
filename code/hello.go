@@ -1,36 +1,23 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "time"
+)
 
-type Books struct {
-    title string
-    author string
-    book_id int
+func say(s string){
+    for i := 0;i < 5; i++{
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
 }
 
+/* 开启4个线程，同时输出tom1,tom2,tom3,tom4,而tom5，tom6是等线程运行完再逐个输出 */
 func main(){
-    var Book1,Book2 Books //声明Book1，Book2为Books类型
-
-    /* 声明一个新结构体并赋值 */
-    Book3 := Books{"书book3","tom",66}
-
-    /* 声明一个新结构体并使用key-value格式赋值 */
-    Book4 := Books{title:"书book4",author:"tom",book_id:66}
-
-    /* 声明一个新结构体并使用key-value格式部分赋值 */
-    Book5 := Books{title:"书book5",book_id:66}
-
-    Book1.title = "书book1"
-    Book1.author = "tom"
-    Book1.book_id = 66
-
-    Book2.title = "书book1"
-    Book2.author = "tom"
-    Book2.book_id = 66
-
-    fmt.Printf("Book1=%s\n",Book1.title)
-    fmt.Printf("Book2=%s\n",Book2.title)
-    fmt.Printf("Book3=%s\n",Book3.title)
-    fmt.Printf("Book4=%s\n",Book4.title)
-    fmt.Printf("Book5=%s\n",Book5.title)
+    go say("tom1") //开启第1个say线程
+    go say("tom2") //开启第2个say线程
+    go say("tom3") //开启第3个say线程
+    say("tom4")
+    say("tom5")
+    say("tom6")
 }

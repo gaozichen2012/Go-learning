@@ -15,8 +15,8 @@
 ## 相关函数
 | 函数名 | 描述 |
 | --- | --- |
-| delete() | 用于删除集合的元素,参数为map及其对应的key<br> 如定义一个`map1 := map[int]string{1:"t",2:"o",3:"m"}`，然后使用`delete(map1,2)`,会删除键值对`1:'0'`，剩下`{1:"t",3:"m"}`|
-
+| delete() | 用于删除集合的元素,参数为map及其对应的key<br> 如定义一个集合`map1 := map[int]string{1:"t",2:"o",3:"m"}`，然后使用`delete(map1,2)`,会删除键值对`2:'0'`，剩下`{1:"t",3:"m"}`|
+|  |  |
 
 ## 相关语法
 
@@ -42,6 +42,7 @@
 * 无限循环用`for true {}`，等同于c的`while(1) {}`
 * Go函数可以有多个返回值，如`func get_value(x,y string) (string,string){return x,y}`，调用时`a,b=get_value(x,y)`
 * 空指针的值为nil，等同于C语言的NULL
+* 变量的数据类型转换，如将浮点数a转化为整数：`int(a)`
 
 ### 字符串连接
 go语言的字符串可以通过+实现，如`fmt.Println("tom"+"is"+"dog")`，输出`tomisdog`
@@ -161,3 +162,67 @@ Book5=书book5
 * Map 是一种集合，所以我们可以像迭代数组和切片那样迭代它。不过，Map 是无序的，我们无法决定它的返回顺序，这是因为 Map 是使用 hash 表来实现的。
 * 定义map可以使用内建函数make，如：`var map1 map[string]string`,也可以使用map关键字定义map，如：`map1 := make(map[string]string)`
 * 如果不初始化map，会创建nil map，nil map不能存放键值对
+
+### 递归函数
+递归就是在运行过程中调用自己，格式如下
+```
+func recursion(){
+    recursion{}
+}
+
+func main(){
+    recursion()
+}
+```
+在使用递归时，必须设置退出条件，否则将陷入无限循环
+
+### 数据类型：接口（interface）（从部分未深入研究，用到时再记录笔记）
+Go提供另外一种数据类型即接口，它把所有的具有共性的方法定义在一起，任何其他类型只要实现了这些方法就是实现了这个接口。
+
+### 错误处理（从部分未深入研究，用到时再记录笔记）
+Go 语言通过内置的错误接口提供了非常简单的错误处理机制。
+error类型是一个接口类型，以下是它的定义：
+```
+type error interface {
+    Error() string
+}
+```
+我们可以在编码中通过实现 error 接口类型来生成错误信息。函数通常在最后的返回值中返回错误信息。使用errors.New 可返回一个错误信息：
+```
+func Sqrt(f float64) (float64, error) {
+    if f < 0 {
+        return 0, errors.New("math: square root of negative number")
+    }
+    // 实现
+}
+```
+### 并发（goroutine）
+* Go 语言支持并发，我们只需要通过 go 关键字来开启一个新的运行期线程goroutine,以一个不同的、新创建的goroutine来执行一个函数。
+* 同一个程序中的所有 goroutine 共享同一个地址空间。
+* goroutine 是轻量级线程，goroutine 的调度是由 Golang 运行时进行管理,格式如下
+
+```
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func say(s string){
+    for i := 0;i < 5; i++{
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
+}
+
+/* 开启4个线程，同时输出tom1,tom2,tom3,tom4,而tom5，tom6是等线程运行完再逐个输出 */
+func main(){
+    go say("tom1") //开启第1个say线程
+    go say("tom2") //开启第2个say线程
+    go say("tom3") //开启第3个say线程
+    say("tom4")
+    say("tom5")
+    say("tom6")
+}
+```
