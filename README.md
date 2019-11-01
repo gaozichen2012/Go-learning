@@ -34,9 +34,9 @@
 * Go的位运算符`& | ^ << >>`完全等同于c
 * Go的赋值运算符`= += -= *= /= %= <<= >>= &= ^= |=`完全等同于c
 * Go的指针运算符`& *`完全等同于c，指针声明的格式为`var ptr *int`，然后再调用ptr
-* 无限循环用`for true {}`等同于c的`while(1) {}`
+* 无限循环用`for true {}`，等同于c的`while(1) {}`
 * Go函数可以有多个返回值，如`func get_value(x,y string) (string,string){return x,y}`，调用时`a,b=get_value(x,y)`
-* 
+* 空指针的值为nil，等同于C语言的NULL
 
 
 ### 字符串连接
@@ -91,6 +91,47 @@ const(
 ### 声明数组的几种形式
 | 形式 | 描述 |
 | --- | --- |
-| 声明不赋值 | `var buf [10] int` |
+| 声明不赋值（默认） | `var buf [10] int` |
 | 声明赋值 | `var buf=[10]int{1,2,3,4}` |
-| 声明不写数组大小直接赋值 |`var buf=[...]int{1,2,3,4}`|
+| 不写数组大小直接赋值 |`var buf=[...]int{1,2,3,4}`|
+
+### 结构体
+定义结构体需要type和struct语句，声明结构体有两种形式，如
+```
+package main
+
+import "fmt"
+
+type Books struct {
+    title string
+    author string
+    book_id int
+}
+
+func main(){
+    var Book1,Book2 Books //声明Book1，Book2为Books类型
+
+    /* 声明一个新结构体并赋值 */
+    Book3 := Books{"书book3","tom",66}
+
+    /* 声明一个新结构体并使用key-value格式赋值 */
+    Book4 := Books{title:"书book4",author:"tom",book_id:66}
+
+    /* 声明一个新结构体并使用key-value格式部分赋值 */
+    Book5 := Books{title:"书book5",book_id:66}
+
+    Book1.title = "书book1"
+    Book1.author = "tom"
+    Book1.book_id = 66
+
+    Book2.title = "书book1"
+    Book2.author = "tom"
+    Book2.book_id = 66
+
+    fmt.Printf("Book1=%s\n",Book1.title)
+    fmt.Printf("Book2=%s\n",Book2.title)
+    fmt.Printf("Book3=%s\n",Book3.title)
+    fmt.Printf("Book4=%s\n",Book4.title)
+    fmt.Printf("Book5=%s\n",Book5.title)
+}
+```
