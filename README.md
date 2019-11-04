@@ -5,7 +5,7 @@
 | 项目名 | 描述 |
 | --- | --- |
 | docker | golang头号优秀项目，通过虚拟化技术实现的操作系统与应用的隔离，也称为容器； | 
-| kubernetes，由google开发，简称k8s，k8s和docker是当前容器化技术的重要基础设施； |
+| kubernetes | 由google开发，简称k8s，k8s和docker是当前容器化技术的重要基础设施； |
 | etcd | 一种可靠的分布式KV存储系统，有点类似于zookeeper，可用于快速的云配置； |
 | codis | 由国人开发提供的一套优秀的redis分布式解决方案； |
 | tidb | 国内PingCAP 团队开发的一个分布式SQL 数据库，国内很多互联网公司在使用； |
