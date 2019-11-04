@@ -5,8 +5,8 @@
 | 项目名 | 描述 |
 | --- | --- |
 | docker | golang头号优秀项目，通过虚拟化技术实现的操作系统与应用的隔离，也称为容器； | 
-| kubernetes | 由google开发，简称k8s，k8s和docker是当前容器化技术的重要基础设施； |
-| etcd | 一种可靠的分布式KV存储系统，有点类似于zookeeper，可用于快速的云配置； |
+| kubernetes | 由google开发，简称k8s，k8s和docker是当前容器化技术的重要基础设施；<bar>Kubernetes基于Docker，其目的是让用户通过Kubernetes集群来进行云端容器集群的管理，而无需用户进行复杂的设置工作。系统会自动选取合适的工作节点来执行具体的容器集群调度处理工作。 |
+| etcd | 一种可靠的分布式KV存储系统，有点类似于zookeeper，可用于快速的云配置；<bar>etcd是由CoreOS开发并维护键值存储系统，它使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性。目前，Google的容器集群管理系统Kubernetes、开源PaaS平台Cloud Foundry和CoreOS的Fleet都广泛使用了etcd。 |
 | codis | 由国人开发提供的一套优秀的redis分布式解决方案； |
 | tidb | 国内PingCAP 团队开发的一个分布式SQL 数据库，国内很多互联网公司在使用； |
 | influxdb | 时序型DB，着力于高性能查询与存储时序型数据，常用于系统监控与金融领域； |
@@ -23,12 +23,13 @@
 | doozer | 高速的分布式数据同步服务，类似ZooKeeper； |
 | tsuru | 开源的PAAS平台，和SAE实现的功能一模一样； |
 | gor | 一款用Go语言实现的简单的http流量复制工具； |
-
+| lime | Lime，则是一款用Go语言写的桌面编辑器程序，被看做是著名编辑器Sublime Text的开源实现。 |
 ## 相关概念
 * 是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。
 * Go的语法接近C语言，但对于变量的声明有所不同
 * Go支持切片型slice、并发goroutine、通道channel、垃圾回收、接口interface等特性的语言级支持
 * 通过使用Go内置gofmt工具后，会自动整理代码，使之符合规定的撰写风格。
+* goroutine和channel是Go并发的两大基石。interface是Go语言编程中数据类型的关键，几乎所有的数据结构都围绕接口展开，接口是Go语言中所有数据结构的核心。
 
 Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。
 * 对于高性能分布式系统领域而言，Go 语言无疑比大多数其它语言有着更高的开发效率。它提供了海量并行的支持
